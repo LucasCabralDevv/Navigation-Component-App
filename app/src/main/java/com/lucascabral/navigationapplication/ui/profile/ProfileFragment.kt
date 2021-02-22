@@ -15,9 +15,4 @@ class ProfileFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-
-    companion object {
-        fun newInstance(): ProfileFragment = ProfileFragment()
-    }
-
 }

@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_startFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.lucascabral.navigationapplication.ui.profile.ProfileFragment"
         android:label="@string/profile_title_action_bar"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.lucascabral.navigationapplication.ui.login.LoginFragment"
+        android:label="@string/login_title_action_bar"
+        tools:layout="@layout/login_fragment" />
 </navigation>

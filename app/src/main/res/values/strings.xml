@@ -7,6 +7,7 @@
 
     // Profile Fragment
     <string name="profile_title_action_bar">Profile</string>
+    <string name="profile_text_user_name">Welcome, %1$s</string>
 
     // Login Fragment
     <string name="login_title_action_bar">Login</string>

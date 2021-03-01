@@ -17,12 +17,19 @@ class LoginViewModel : ViewModel() {
     val authenticationStateEvent: LiveData<AuthenticationState>
     get() = _authenticationStateEvent
 
+    var userName: String = ""
+
     init {
+        refuseAuthentication()
+    }
+
+    fun refuseAuthentication() {
         _authenticationStateEvent.value = AuthenticationState.Unauthenticated
     }
 
     fun authentication(userName: String, password: String) {
         if (isValidForm(userName, password)) { // Usuário autenticado
+            this.userName = userName
             _authenticationStateEvent.value = AuthenticationState.Authenticated
         }
     }

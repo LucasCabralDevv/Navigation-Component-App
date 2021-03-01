@@ -9,13 +9,10 @@
         android:id="@+id/startFragment"
         android:name="com.lucascabral.navigationapplication.ui.start.StartFragment"
         android:label="@string/start_title_action_bar"
-        tools:layout="@layout/fragment_start" >
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_startFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_startFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

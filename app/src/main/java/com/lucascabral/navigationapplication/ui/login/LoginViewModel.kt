@@ -8,6 +8,8 @@ import com.lucascabral.navigationapplication.R
 class LoginViewModel : ViewModel() {
 
     sealed class AuthenticationState {
+        object Authenticated : AuthenticationState()
+        object Unauthenticated : AuthenticationState()
         class InvalidAuthentication(val fields: List<Pair<String, Int>>) : AuthenticationState()
     }
 
@@ -15,9 +17,13 @@ class LoginViewModel : ViewModel() {
     val authenticationStateEvent: LiveData<AuthenticationState>
     get() = _authenticationStateEvent
 
+    init {
+        _authenticationStateEvent.value = AuthenticationState.Unauthenticated
+    }
+
     fun authentication(userName: String, password: String) {
         if (isValidForm(userName, password)) { // Usuário autenticado
-
+            _authenticationStateEvent.value = AuthenticationState.Authenticated
         }
     }
 

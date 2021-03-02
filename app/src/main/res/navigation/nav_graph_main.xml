@@ -23,5 +23,18 @@
         android:id="@+id/loginFragment"
         android:name="com.lucascabral.navigationapplication.ui.login.LoginFragment"
         android:label="@string/login_title_action_bar"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation"
+            app:destination="@id/nav_graph_registration" />
+    </fragment>
+    <navigation
+        android:id="@+id/nav_graph_registration"
+        app:startDestination="@id/profileDataFragment">
+        <fragment
+            android:id="@+id/profileDataFragment"
+            android:name="com.lucascabral.navigationapplication.ui.registration.profile.ProfileDataFragment"
+            android:label="fragment_profile_data"
+            tools:layout="@layout/fragment_profile_data" />
+    </navigation>
 </navigation>

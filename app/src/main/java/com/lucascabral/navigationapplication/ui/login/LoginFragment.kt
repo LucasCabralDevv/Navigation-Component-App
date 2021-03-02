@@ -32,26 +32,43 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
+        listenToAuthenticationStateEvent()
+        registerViewListeners()
+        registerDeviceBackStackCallback()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        cancelAuthentication()
+        return true
+    }
+
+    private fun listenToAuthenticationStateEvent() {
         viewModel.authenticationStateEvent.observe(
-            viewLifecycleOwner,
-            Observer { authenticationState ->
-                when (authenticationState) {
-                    is LoginViewModel.AuthenticationState.Authenticated -> {
-                        findNavController().popBackStack()
-                    }
-                    is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
-                        val validationFields: Map<String, TextInputLayout> = initValidationFields()
-                        authenticationState.fields.forEach { fieldError ->
-                            validationFields[fieldError.first]?.error = getString(fieldError.second)
-                        }
+            viewLifecycleOwner
+        ) { authenticationState ->
+            when (authenticationState) {
+                is LoginViewModel.AuthenticationState.Authenticated -> {
+                    findNavController().popBackStack()
+                }
+                is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
+                    val validationFields: Map<String, TextInputLayout> = initValidationFields()
+                    authenticationState.fields.forEach { fieldError ->
+                        validationFields[fieldError.first]?.error = getString(fieldError.second)
                     }
                 }
-            })
+            }
+        }
+    }
 
+    private fun registerViewListeners() {
         buttonLoginSignIn.setOnClickListener {
             val userName = inputLoginUsername.text.toString()
             val password = inputLoginPassword.text.toString()
             viewModel.authentication(userName, password)
+        }
+
+        buttonLoginSignUp.setOnClickListener {
+            findNavController().navigateWithAnimations(R.id.action_loginFragment_to_navigation)
         }
 
         inputLoginUsername.addTextChangedListener {
@@ -60,15 +77,12 @@ class LoginFragment : Fragment() {
         inputLoginPassword.addTextChangedListener {
             inputLayoutLoginPassword.dismissError()
         }
+    }
 
+    private fun registerDeviceBackStackCallback() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             cancelAuthentication()
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        cancelAuthentication()
-        return true
     }
 
     private fun cancelAuthentication() {

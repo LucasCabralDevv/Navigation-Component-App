@@ -34,7 +34,7 @@
         <fragment
             android:id="@+id/profileDataFragment"
             android:name="com.lucascabral.navigationapplication.ui.registration.profile.ProfileDataFragment"
-            android:label="fragment_profile_data"
+            android:label="@string/profile_data_action_bar_title"
             tools:layout="@layout/fragment_profile_data">
             <action
                 android:id="@+id/action_profileDataFragment_to_chooseCredentialsFragment"
@@ -43,7 +43,7 @@
         <fragment
             android:id="@+id/chooseCredentialsFragment"
             android:name="com.lucascabral.navigationapplication.ui.registration.choosecredentials.ChooseCredentialsFragment"
-            android:label="fragment_choose_credentials"
+            android:label="@string/choose_credentials_action_bar_title"
             tools:layout="@layout/fragment_choose_credentials">
             <argument
                 android:name="name"

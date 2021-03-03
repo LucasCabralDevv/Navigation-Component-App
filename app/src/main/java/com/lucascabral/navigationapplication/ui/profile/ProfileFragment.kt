@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
 
             when (authenticationState) {
                 is LoginViewModel.AuthenticationState.Authenticated -> {
-                    profileUserNameTextView.text = getString(R.string.profile_text_user_name, loginViewModel.userName)
+                    profileUserNameTextView.text = getString(R.string.profile_text_user_name, loginViewModel.username)
                 }
                 is LoginViewModel.AuthenticationState.Unauthenticated -> {
                     findNavController().navigate(R.id.loginFragment)

@@ -1,6 +1,7 @@
 package com.lucascabral.navigationapplication.extensions
 
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.lucascabral.navigationapplication.R
 
@@ -13,4 +14,8 @@ private val navOptions = NavOptions.Builder()
 
 fun NavController.navigateWithAnimations(destinationId: Int) {
     this.navigate(destinationId, null, navOptions)
+}
+
+fun NavController.navigateWithAnimations(directions: NavDirections) {
+    this.navigate(directions, navOptions)
 }

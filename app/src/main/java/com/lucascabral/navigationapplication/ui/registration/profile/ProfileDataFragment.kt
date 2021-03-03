@@ -56,7 +56,7 @@ class ProfileDataFragment : Fragment() {
                     val directions = ProfileDataFragmentDirections
                         .actionProfileDataFragmentToChooseCredentialsFragment(name)
 
-                    navController.navigate(directions)
+                    navController.navigateWithAnimations(directions)
                 }
                 is RegistrationViewModel.RegistrationState.InvalidProfileData -> {
                     registrationState.fields.forEach { fieldError ->

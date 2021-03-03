@@ -8,16 +8,17 @@ import com.lucascabral.navigationapplication.R
 class LoginViewModel : ViewModel() {
 
     sealed class AuthenticationState {
-        object Authenticated : AuthenticationState()
         object Unauthenticated : AuthenticationState()
+        object Authenticated : AuthenticationState()
         class InvalidAuthentication(val fields: List<Pair<String, Int>>) : AuthenticationState()
     }
 
+    var username: String = ""
+    var token: String = ""
+
     private val _authenticationStateEvent = MutableLiveData<AuthenticationState>()
     val authenticationStateEvent: LiveData<AuthenticationState>
-    get() = _authenticationStateEvent
-
-    var userName: String = ""
+        get() = _authenticationStateEvent
 
     init {
         refuseAuthentication()
@@ -27,24 +28,32 @@ class LoginViewModel : ViewModel() {
         _authenticationStateEvent.value = AuthenticationState.Unauthenticated
     }
 
-    fun authentication(userName: String, password: String) {
-        if (isValidForm(userName, password)) { // Usuário autenticado
-            this.userName = userName
+    fun authenticateToken(token: String, username: String) {
+        this.token = token
+        this.username = username
+        _authenticationStateEvent.value = AuthenticationState.Authenticated
+    }
+
+    fun authenticate(username: String, password: String) {
+        if (isValidForm(username, password)) {
+            this.username = username
             _authenticationStateEvent.value = AuthenticationState.Authenticated
         }
     }
 
-    private fun isValidForm(userName: String, password: String): Boolean {
+    private fun isValidForm(username: String, password: String): Boolean {
         val invalidFields = arrayListOf<Pair<String, Int>>()
-
-        if (userName.isEmpty()) {
+        if (username.isEmpty()) {
             invalidFields.add(INPUT_USERNAME)
         }
+
         if (password.isEmpty()) {
             invalidFields.add(INPUT_PASSWORD)
         }
+
         if (invalidFields.isNotEmpty()) {
-            _authenticationStateEvent.value = AuthenticationState.InvalidAuthentication(invalidFields)
+            _authenticationStateEvent.value =
+                AuthenticationState.InvalidAuthentication(invalidFields)
             return false
         }
 

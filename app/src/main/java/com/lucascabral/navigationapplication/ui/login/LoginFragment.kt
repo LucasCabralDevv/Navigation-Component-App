@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
         buttonLoginSignIn.setOnClickListener {
             val userName = inputLoginUsername.text.toString()
             val password = inputLoginPassword.text.toString()
-            viewModel.authentication(userName, password)
+            viewModel.authenticate(userName, password)
         }
 
         buttonLoginSignUp.setOnClickListener {

@@ -10,7 +10,7 @@ import com.lucascabral.navigationapplication.data.db.UserEntity
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(user: UserEntity)
+    suspend fun save(user: UserEntity)
 
     @Query("SELECT * FROM user WHERE id = :id")
     fun getUser(id: Long): UserEntity

@@ -5,7 +5,7 @@ import com.lucascabral.navigationapplication.ui.registration.RegistrationViewPar
 
 interface UserRepository {
 
-    fun createUser(registrationViewParams: RegistrationViewParams)
+    suspend fun createUser(registrationViewParams: RegistrationViewParams)
 
     fun getUser(id: Long): User
 

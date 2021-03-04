@@ -1,11 +1,9 @@
 package com.lucascabral.navigationapplication.ui.registration
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.lucascabral.navigationapplication.R
 import com.lucascabral.navigationapplication.data.repository.UserRepository
+import kotlinx.coroutines.launch
 
 class RegistrationViewModel(
     private val userRepository: UserRepository
@@ -50,14 +48,15 @@ class RegistrationViewModel(
 
     fun createCredentials(username: String, password: String) {
         if (isValidCredentials(username, password)) {
+            viewModelScope.launch {
+                registrationViewParams.username = username
+                registrationViewParams.password = password
 
-            registrationViewParams.username = username
-            registrationViewParams.password = password
+                userRepository.createUser(registrationViewParams)
 
-            userRepository.createUser(registrationViewParams)
-
-            this.authToken = "token"
-            _registrationStateEvent.value = RegistrationState.RegistrationCompleted
+                this@RegistrationViewModel.authToken = "token"
+                _registrationStateEvent.value = RegistrationState.RegistrationCompleted
+            }
         }
     }
 

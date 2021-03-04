@@ -9,7 +9,7 @@ import com.lucascabral.navigationapplication.ui.registration.RegistrationViewPar
 class UserDbDataSource(
     private val userDao: UserDao
 ) : UserRepository {
-    override fun createUser(registrationViewParams: RegistrationViewParams) {
+    override suspend fun createUser(registrationViewParams: RegistrationViewParams) {
         val userEntity = registrationViewParams.toUserEntity()
         userDao.save(userEntity)
     }

@@ -23,7 +23,6 @@ class RegistrationViewModel(
 
             registrationViewParams.name = name
             registrationViewParams.bio = bio
-
             _registrationStateEvent.value = RegistrationState.CollectCredentials
         }
     }
@@ -33,16 +32,13 @@ class RegistrationViewModel(
         if (name.isEmpty()) {
             invalidFields.add(INPUT_NAME)
         }
-
         if (bio.isEmpty()) {
             invalidFields.add(INPUT_BIO)
         }
-
         if (invalidFields.isNotEmpty()) {
             _registrationStateEvent.value = RegistrationState.InvalidProfileData(invalidFields)
             return false
         }
-
         return true
     }
 
@@ -74,7 +70,6 @@ class RegistrationViewModel(
             _registrationStateEvent.value = RegistrationState.InvalidCredentials(invalidFields)
             return false
         }
-
         return true
     }
 
@@ -85,7 +80,7 @@ class RegistrationViewModel(
     }
 
     sealed class RegistrationState {
-        object CollectProfileData :  RegistrationState()
+        object CollectProfileData : RegistrationState()
         object CollectCredentials : RegistrationState()
         object RegistrationCompleted : RegistrationState()
         class InvalidProfileData(val fields: List<Pair<String, Int>>) : RegistrationState()
@@ -97,7 +92,6 @@ class RegistrationViewModel(
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return RegistrationViewModel(userRepository) as T
         }
-
     }
 
     companion object {

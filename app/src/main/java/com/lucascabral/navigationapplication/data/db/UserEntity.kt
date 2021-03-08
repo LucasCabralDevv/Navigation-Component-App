@@ -7,7 +7,7 @@ import com.lucascabral.navigationapplication.ui.registration.RegistrationViewPar
 
 @Entity(tableName = "user")
 data class UserEntity (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val name: String,
     val bio: String,

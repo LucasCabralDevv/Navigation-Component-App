@@ -19,9 +19,13 @@ import com.lucascabral.navigationapplication.extensions.dismissError
 import com.lucascabral.navigationapplication.extensions.navigateWithAnimations
 import com.lucascabral.navigationapplication.ui.registration.RegistrationViewModel
 import kotlinx.android.synthetic.main.fragment_profile_data.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileDataFragment : Fragment() {
 
+    private val registrationViewModel: RegistrationViewModel by viewModel()
+
+    /*
     private val registrationViewModel: RegistrationViewModel by activityViewModels(
         factoryProducer = {
             val database = AppDatabase.getDatabase(requireContext())
@@ -29,7 +33,7 @@ class ProfileDataFragment : Fragment() {
                 userRepository = UserDbDataSource(database.userDao())
             )
         }
-    )
+    ) */
 
     private val navController: NavController by lazy {
         findNavController()

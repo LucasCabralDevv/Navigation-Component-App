@@ -18,11 +18,12 @@ import com.lucascabral.navigationapplication.extensions.dismissError
 import com.lucascabral.navigationapplication.ui.login.LoginViewModel
 import com.lucascabral.navigationapplication.ui.registration.RegistrationViewModel
 import kotlinx.android.synthetic.main.fragment_choose_credentials.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChooseCredentialsFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by activityViewModels()
-    private val registrationViewModel: RegistrationViewModel by activityViewModels()
+    private val registrationViewModel: RegistrationViewModel by viewModel()
 
     private val args: ChooseCredentialsFragmentArgs by navArgs()
 
